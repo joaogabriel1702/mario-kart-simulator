@@ -51,55 +51,66 @@ async function playRaceEngine(character1, character2) {
         console.log(`Bloco: ${block}`)
 
         // rolar os dados
-    let diceResult1 = await rollDice()
-    let diceResult2 = await rollDice()
+        let diceResult1 = await rollDice()
+        let diceResult2 = await rollDice()
 
-    //teste de habilidade
-    let totalTesteSkill1 = 0
-    let totalTesteSkill2 = 0
+        //teste de habilidade
+        let totalTesteSkill1 = 0
+        let totalTesteSkill2 = 0
 
-    if(block === "RETA"){
-        totalTesteSkill1 = diceResult1 + character1.VELOCIDADE
-        totalTesteSkill2 = diceResult2 + character1.VELOCIDADE
+        if(block === "RETA"){
+            totalTesteSkill1 = diceResult1 + character1.VELOCIDADE
+            totalTesteSkill2 = diceResult2 + character1.VELOCIDADE
 
-        await logRollResult(
-            character1.NAME, 
-            "velocidade", 
-            diceResult1, 
-            character1.VELOCIDADE
-        )
+            await logRollResult(
+                character1.NOME, 
+                "velocidade", 
+                diceResult1, 
+                character1.VELOCIDADE
+            )
 
-        await logRollResult(
-            character2.NAME, 
-            "velocidade", 
-            diceResult2, 
-            character2.VELOCIDADE
-        )
-    }
+            await logRollResult(
+                character2.NOME, 
+                "velocidade", 
+                diceResult2, 
+                character2.VELOCIDADE
+            )
+        }
 
-    if(block === "CURVA"){
-        totalTesteSkill1 = diceResult1 + character1.MANOBRABILIDADE
-        totalTesteSkill2 = diceResult2 + character1.MANOBRABILIDADE
+        if(block === "CURVA"){
+            totalTesteSkill1 = diceResult1 + character1.MANOBRABILIDADE
+            totalTesteSkill2 = diceResult2 + character1.MANOBRABILIDADE
 
-        await logRollResult(
-            character1.NAME, 
-            "curva", 
-            diceResult1, 
-            character1.MANOBRABILIDADE
-        )
+            await logRollResult(
+                character1.NOME, 
+                "curva", 
+                diceResult1, 
+                character1.MANOBRABILIDADE
+            )
 
-        await logRollResult(
-            character2.NAME, 
-            "curva", 
-            diceResult2, 
-            character2.MANOBRABILIDADE
-        )
-    }
+            await logRollResult(
+                character2.NOME, 
+                "curva", 
+                diceResult2, 
+                character2.MANOBRABILIDADE
+            )
+        }
 
-    if(block === "CONFRONTO"){
-        let powerResult1 = diceResult1 + character1.PODER
-        let powerResult2 = diceResult2 + character1.PODER
-    }
+        if(block === "CONFRONTO"){
+            let powerResult1 = diceResult1 + character1.PODER
+            let powerResult2 = diceResult2 + character1.PODER
+        }
+
+        //verificando o vencedor
+        if(totalTesteSkill1 > totalTesteSkill2){
+            console.log(`${character1.NOME} marcou um ponto!`)
+            character1.PONTOS++
+        } else if(totalTesteSkill1 < totalTesteSkill2){
+            console.log(`${character2.NOME} marcou um ponto!`)
+            character2.PONTOS++
+        }
+
+        console.log("------------------------------------------")
     }
 }
 
